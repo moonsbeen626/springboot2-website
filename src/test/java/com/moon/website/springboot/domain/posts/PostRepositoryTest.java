@@ -58,7 +58,7 @@ public class PostRepositoryTest {
         //when
         List<Posts> postsList = postsRepository.findAll();
 
-        //then
+        //thenA
         Posts posts = postsList.get(0);
         System.out.println(">>>>>>>> createDate=" + posts.getCreatedDate() + ", modifiedDate=" + posts.getModifiedDate());
 
