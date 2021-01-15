@@ -1,3 +1,6 @@
 # Project exclude paths
 .gradle
 .idea
+
+#비밀 키 숨기기 위함
+application-oauth.properties

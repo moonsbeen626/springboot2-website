@@ -1,5 +1,6 @@
 package com.moon.website.springboot.web;
 
+import com.moon.website.springboot.config.auth.dto.SessionUser;
 import com.moon.website.springboot.service.posts.PostsService;
 import com.moon.website.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -8,15 +9,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor //final필드 의존성 주입 어노테이션 없이
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model) { //Model은 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장.
         model.addAttribute("posts", postsService.findAllDesc()); //postsService.findAllDesc로 가져온 결과를 posts로 index.mustache에 전달
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //
+
+        if(user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
         return "index";
     }
 
