@@ -1,5 +1,6 @@
 package com.moon.website.springboot.web;
 
+import com.moon.website.springboot.config.auth.LoginUser;
 import com.moon.website.springboot.config.auth.dto.SessionUser;
 import com.moon.website.springboot.service.posts.PostsService;
 import com.moon.website.springboot.web.dto.PostsResponseDto;
@@ -19,10 +20,9 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) { //Model은 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장.
+    //어느 컨트롤러든지 @LoginUser을 사용하면 세션 정보를 가져올 수 있음.
+    public String index(Model model, @LoginUser SessionUser user) { //Model은 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장.
         model.addAttribute("posts", postsService.findAllDesc()); //postsService.findAllDesc로 가져온 결과를 posts로 index.mustache에 전달
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //
 
         if(user != null) {
             model.addAttribute("userName", user.getName());

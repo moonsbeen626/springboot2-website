@@ -17,11 +17,11 @@ public class IndexControllerTest {
     private TestRestTemplate testRestTemplate; //<-> MockMvc, TestRestTemplate은 서블릿 컨테이너를 사용해 실제 서버가 동작하는 것 처럼 테스트 수행 가능.
 
     @Test
-    public void 메인페이지_로딩() {
+    public void loading_main() {
         //when
         String body = this.testRestTemplate.getForObject("/", String.class); //주어진 URL 주소로 HTTP GET 메서드로 객체로 결과를 반환받는다
 
         //then
-        assertThat(body).contains("스프링 부트로 시작하는 웹 서비스");
+        assertThat(body).contains("스프링부트로 시작하는 웹 서비스 Ver.2");
     }
 }
