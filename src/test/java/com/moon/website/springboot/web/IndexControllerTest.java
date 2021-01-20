@@ -22,6 +22,6 @@ public class IndexControllerTest {
         String body = this.testRestTemplate.getForObject("/", String.class); //주어진 URL 주소로 HTTP GET 메서드로 객체로 결과를 반환받는다
 
         //then
-        assertThat(body).contains("스프링부트로 시작하는 웹 서비스 Ver.2");
+        assertThat(body).contains("스프링부트로 시작하는 웹 서비스");
     }
 }
